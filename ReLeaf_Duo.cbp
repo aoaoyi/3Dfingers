@@ -2,28 +2,40 @@
 <CodeBlocks_project_file>
   <FileVersion major="1" minor="6" />
   <Project>
-    <Option title="ReLeaf_Duo" />
+    <Option title="ReLeaf Duo 2.0 (Windows x64)" />
     <Option pch_mode="2" />
     <Option compiler="gcc" />
     <Build>
       <Target title="Debug">
         <Option output="bin/Debug/ReLeaf_Duo" prefix_auto="1" extension_auto="1" />
         <Option object_output="obj/Debug/" />
-        <Option type="0" />
+        <Option type="1" />
         <Option compiler="gcc" />
-        <Compiler><Add option="-g"/><Add option="-std=c++11"/></Compiler>
+        <Compiler><Add option="-g"/><Add option="-O0"/></Compiler>
       </Target>
       <Target title="Release">
         <Option output="bin/Release/ReLeaf_Duo" prefix_auto="1" extension_auto="1" />
         <Option object_output="obj/Release/" />
-        <Option type="0" />
+        <Option type="1" />
         <Option compiler="gcc" />
-        <Compiler><Add option="-O2"/><Add option="-std=c++11"/></Compiler>
+        <Compiler><Add option="-O2"/><Add option="-DNDEBUG"/></Compiler>
       </Target>
     </Build>
-    <Compiler><Add option="-Wall"/></Compiler>
-    <Linker><Add library="opengl32"/><Add library="glu32"/><Add library="freeglut"/></Linker>
+    <Compiler>
+      <Add option="-std=c++11"/><Add option="-Wall"/><Add option="-Wextra"/><Add option="-Wpedantic"/>
+      <Add directory="third_party/freeglut/include" />
+    </Compiler>
+    <Linker>
+      <Add option="-static" />
+      <Add option="-l:libfreeglut.dll.a" />
+      <Add directory="third_party/freeglut/lib/x64" />
+      <Add library="opengl32"/><Add library="glu32"/>
+    </Linker>
+    <ExtraCommands>
+      <Add after="cmd /c copy /Y &quot;$(PROJECT_DIR)\third_party\freeglut\bin\x64\libfreeglut.dll&quot; &quot;$(TARGET_OUTPUT_DIR)\libfreeglut.dll&quot;" />
+    </ExtraCommands>
     <Unit filename="main.cpp"><Option compilerVar="CPP" /></Unit>
+    <Unit filename="geometry.h" />
     <Extensions><code_completion /></Extensions>
   </Project>
 </CodeBlocks_project_file>
